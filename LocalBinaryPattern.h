@@ -15,6 +15,10 @@ Mat localBinaryPattern(Mat& inputImg);
 
 vector<int> getNeighbors(int i, int j, Mat& img);
 
+vector<int> computeDifferences(int gs, vector<int> vector);
+
+int doDecimal(vector<int> diff);
+
 #endif //LBPSEQUENTIAL_LOCALBYNARYPATTERN_H
 
 
