@@ -11,11 +11,16 @@ Mat localBinaryPattern(Mat& inputImg) {
     for (int i = 0; i< inputImg.rows; i++) {
         for (int j = 0; j < inputImg.cols; j++) {
             vector<int> neighbors = getNeighbors(i, j, inputImg);
-            Scalar intensity = inputImg.at<uchar>(i, j);
-            int currentPixelGS = intensity.val[0];
+            int currentPixelGS = inputImg.at<uchar>(i, j);
             vector<int> differences = computeDifferences(currentPixelGS, neighbors);
 
-            imgOut.at<uchar>(i, j) = doDecimal(differences);
+            int newVal = doDecimal(differences);
+            imgOut.at<uchar>(i, j) = newVal;
+
+            if (imgOut.at<uchar>(i, j) != newVal) {
+                printf("Pixel at (%d, %d) was not set correctly", i, j);
+            }
+
         }
     }
 
@@ -30,43 +35,32 @@ vector<int> getNeighbors(int i, int j, Mat& img) {
 
         if (j == 0) {
 
-            Scalar intensity = img.at<uchar>(i, j + 1);
-            neighbors.at(3) = intensity.val[0];
+            neighbors.at(3) = img.at<uchar>(i, j + 1);
 
-            intensity = img.at<uchar>(i + 1, j + 1);
-            neighbors.at(4) = intensity.val[0];
+            neighbors.at(4) = img.at<uchar>(i + 1, j + 1);
 
-            intensity = img.at<uchar>(i + 1, j);
-            neighbors.at(5) = intensity.val[0];
+            neighbors.at(5) = img.at<uchar>(i + 1, j);
 
         }
 
         else if (j < img.cols - 1) {
-            Scalar intensity = img.at<uchar>(i, j + 1);
-            neighbors.at(3) = intensity.val[0];
+            neighbors.at(3) = img.at<uchar>(i, j + 1);
 
-            intensity = img.at<uchar>(i + 1, j + 1);
-            neighbors.at(4) = intensity.val[0];
+            neighbors.at(4) = img.at<uchar>(i + 1, j + 1);
 
-            intensity = img.at<uchar>(i + 1, j);
-            neighbors.at(5) = intensity.val[0];
+            neighbors.at(5) = img.at<uchar>(i + 1, j);
 
-            intensity = img.at<uchar>(i + 1, j - 1);
-            neighbors.at(6) = intensity.val[0];
+            neighbors.at(6) = img.at<uchar>(i + 1, j - 1);
 
-            intensity = img.at<uchar>(i, j - 1);
-            neighbors.at(7) = intensity.val[0];
+            neighbors.at(7) = img.at<uchar>(i, j - 1);
         }
 
         else if (j == img.cols - 1) {
-            Scalar intensity = img.at<uchar>(i + 1, j);
-            neighbors.at(5) = intensity.val[0];
+            neighbors.at(5) = img.at<uchar>(i + 1, j);
 
-            intensity = img.at<uchar>(i + 1, j - 1);
-            neighbors.at(6) = intensity.val[0];
+            neighbors.at(6) = img.at<uchar>(i + 1, j - 1);
 
-            intensity = img.at<uchar>(i, j - 1);
-            neighbors.at(7) = intensity.val[0];
+            neighbors.at(7) = img.at<uchar>(i, j - 1);
         }
 
     }
@@ -74,105 +68,76 @@ vector<int> getNeighbors(int i, int j, Mat& img) {
     else if (i > 0 && i < img.rows - 1) {
 
         if (j == 0) {
-            Scalar intensity = img.at<uchar>(i - 1, j);
-            neighbors.at(1) = intensity.val[0];
+            neighbors.at(1) = img.at<uchar>(i - 1, j);
 
-            intensity = img.at<uchar>(i - 1, j + 1);
-            neighbors.at(2) = intensity.val[0];
+            neighbors.at(2) = img.at<uchar>(i - 1, j + 1);
 
-            intensity = img.at<uchar>(i, j + 1);
-            neighbors.at(3) = intensity.val[0];
+            neighbors.at(3) = img.at<uchar>(i, j + 1);
 
-            intensity = img.at<uchar>(i + 1, j + 1);
-            neighbors.at(4) = intensity.val[0];
+            neighbors.at(4) = img.at<uchar>(i + 1, j + 1);
 
-            intensity = img.at<uchar>(i + 1, j);
-            neighbors.at(5) = intensity.val[0];
+            neighbors.at(5) = img.at<uchar>(i + 1, j);
         }
 
         else if (j < img.cols - 1) {
 
-            Scalar intensity = img.at<uchar>(i - 1, j - 1);
-            neighbors.at(0) = intensity.val[0];
+            neighbors.at(0) = img.at<uchar>(i - 1, j - 1);
 
-            intensity = img.at<uchar>(i - 1, j);
-            neighbors.at(1) = intensity.val[0];
+            neighbors.at(1) = img.at<uchar>(i - 1, j);
 
-            intensity = img.at<uchar>(i - 1, j + 1);
-            neighbors.at(2) = intensity.val[0];
+            neighbors.at(2) = img.at<uchar>(i - 1, j + 1);
 
-            intensity = img.at<uchar>(i, j + 1);
-            neighbors.at(3) = intensity.val[0];
+            neighbors.at(3) = img.at<uchar>(i, j + 1);
 
-            intensity = img.at<uchar>(i + 1, j + 1);
-            neighbors.at(4) = intensity.val[0];
+            neighbors.at(4) = img.at<uchar>(i + 1, j + 1);
 
-            intensity = img.at<uchar>(i + 1, j);
-            neighbors.at(5) = intensity.val[0];
+            neighbors.at(5) = img.at<uchar>(i + 1, j);
 
-            intensity = img.at<uchar>(i + 1, j - 1);
-            neighbors.at(6) = intensity.val[0];
+            neighbors.at(6) = img.at<uchar>(i + 1, j - 1);
 
-            intensity = img.at<uchar>(i, j - 1);
-            neighbors.at(7) = intensity.val[0];
+            neighbors.at(7) = img.at<uchar>(i, j - 1);
         }
 
         else if (j == img.cols - 1) {
-            Scalar intensity = img.at<uchar>(i - 1, j - 1);
-            neighbors.at(0) = intensity.val[0];
+            neighbors.at(0) = img.at<uchar>(i - 1, j - 1);
 
-            intensity = img.at<uchar>(i - 1, j);
-            neighbors.at(1) = intensity.val[0];
+            neighbors.at(1) = img.at<uchar>(i - 1, j);
 
-            intensity = img.at<uchar>(i + 1, j);
-            neighbors.at(5) = intensity.val[0];
+            neighbors.at(5) = img.at<uchar>(i + 1, j);
 
-            intensity = img.at<uchar>(i + 1, j - 1);
-            neighbors.at(6) = intensity.val[0];
+            neighbors.at(6) = img.at<uchar>(i + 1, j - 1);
 
-            intensity = img.at<uchar>(i, j - 1);
-            neighbors.at(7) = intensity.val[0];
+            neighbors.at(7) = img.at<uchar>(i, j - 1);
         }
     }
 
     else {
         if (j == 0) {
-            Scalar intensity = img.at<uchar>(i - 1, j);
-            neighbors.at(1) = intensity.val[0];
+            neighbors.at(1) = img.at<uchar>(i - 1, j);
 
-            intensity = img.at<uchar>(i - 1, j + 1);
-            neighbors.at(2) = intensity.val[0];
+            neighbors.at(2) = img.at<uchar>(i - 1, j + 1);
 
-            intensity = img.at<uchar>(i, j + 1);
-            neighbors.at(3) = intensity.val[0];
+            neighbors.at(3) = img.at<uchar>(i, j + 1);
         }
 
         else if (j < img.cols - 1) {
-            Scalar intensity = img.at<uchar>(i - 1, j - 1);
-            neighbors.at(0) = intensity.val[0];
+            neighbors.at(0) = img.at<uchar>(i - 1, j - 1);
 
-            intensity = img.at<uchar>(i - 1, j);
-            neighbors.at(1) = intensity.val[0];
+            neighbors.at(1) = img.at<uchar>(i - 1, j);
 
-            intensity = img.at<uchar>(i - 1, j + 1);
-            neighbors.at(2) = intensity.val[0];
+            neighbors.at(2) = img.at<uchar>(i - 1, j + 1);
 
-            intensity = img.at<uchar>(i, j + 1);
-            neighbors.at(3) = intensity.val[0];
+            neighbors.at(3) = img.at<uchar>(i, j + 1);
 
-            intensity = img.at<uchar>(i, j - 1);
-            neighbors.at(7) = intensity.val[0];
+            neighbors.at(7) = img.at<uchar>(i, j - 1);
         }
 
         else if (j == img.cols - 1) {
-            Scalar intensity = img.at<uchar>(i - 1, j - 1);
-            neighbors.at(0) = intensity.val[0];
+            neighbors.at(0) = img.at<uchar>(i - 1, j - 1);
 
-            intensity = img.at<uchar>(i - 1, j);
-            neighbors.at(1) = intensity.val[0];
+            neighbors.at(1) = img.at<uchar>(i - 1, j);
 
-            intensity = img.at<uchar>(i, j - 1);
-            neighbors.at(7) = intensity.val[0];
+            neighbors.at(7) = img.at<uchar>(i, j - 1);
         }
     }
 
