@@ -4,6 +4,7 @@
 
 #include "LocalBinaryPattern.h"
 
+vector<int> weights{1, 2, 4, 8, 16, 32, 64, 128};
 
 Mat localBinaryPattern(Mat& inputImg) {
     Mat imgOut = Mat::zeros(inputImg.rows, inputImg.cols, CV_64FC1);
@@ -158,7 +159,8 @@ vector<int> computeDifferences(int gs, vector<int> n) {
 int doDecimal(vector<int> diff) {
     int value = 0;
     for (int i = 0; i < diff.size(); i++) {
-        value += diff.at(i) * pow(2, i);
+        if (diff.at(i) == 1)
+            value += weights.at(i);
     }
 
     return value;
