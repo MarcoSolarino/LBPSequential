@@ -15,9 +15,9 @@ Mat localBinaryPattern(Mat& inputImg);
 
 int *getNeighbors(int i, int j, Mat& img);
 
-bool *isGretEq(int gs, int *n);
+bool *isGreatEq(int gs, const int *n);
 
-int toDecimal(bool *diff);
+int toDecimal(const bool *diff, const int *weights);
 
 #endif //LBPSEQUENTIAL_LOCALBYNARYPATTERN_H
 
