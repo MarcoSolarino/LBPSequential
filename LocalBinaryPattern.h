@@ -13,11 +13,11 @@ using namespace std;
 
 Mat localBinaryPattern(Mat& inputImg);
 
-vector<int> getNeighbors(int i, int j, Mat& img);
+int *getNeighbors(int i, int j, Mat& img);
 
-vector<int> computeDifferences(int gs, vector<int> vector);
+bool *isGretEq(int gs, int *n);
 
-int doDecimal(vector<int> diff);
+int toDecimal(bool *diff);
 
 #endif //LBPSEQUENTIAL_LOCALBYNARYPATTERN_H
 
