@@ -1,3 +1,7 @@
+//
+// Created by marcolarino on 27/03/21.
+//
+
 #ifndef LBPSEQUENTIAL_LOCALBYNARYPATTERN_H
 #define LBPSEQUENTIAL_LOCALBYNARYPATTERN_H
 
