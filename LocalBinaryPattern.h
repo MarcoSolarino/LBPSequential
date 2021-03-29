@@ -13,7 +13,7 @@ int *getNeighbors(int i, int j, Mat& img);
 
 bool *isGreatEq(int gs, const int *n);
 
-int toDecimalmm(const bool *diff, const int *weights);
+int toDecimal(const bool *diff, const int *weights);
 
 #endif //LBPSEQUENTIAL_LOCALBYNARYPATTERN_H
 
