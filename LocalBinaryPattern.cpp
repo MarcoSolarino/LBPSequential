@@ -7,7 +7,7 @@
 vector<int> weights{1, 2, 4, 8, 16, 32, 64, 128};
 
 Mat localBinaryPattern(Mat& inputImg) {
-    Mat imgOut = Mat::zeros(inputImg.rows, inputImg.cols, CV_64FC1);
+    Mat imgOut = Mat::zeros(inputImg.rows, inputImg.cols, CV_8UC1);
 
     for (int i = 0; i< inputImg.rows; i++) {
         for (int j = 0; j < inputImg.cols; j++) {
