@@ -1,7 +1,3 @@
-//
-// Created by marcolarino on 27/03/21.
-//
-
 #ifndef LBPSEQUENTIAL_LOCALBYNARYPATTERN_H
 #define LBPSEQUENTIAL_LOCALBYNARYPATTERN_H
 
@@ -17,7 +13,7 @@ int *getNeighbors(int i, int j, Mat& img);
 
 bool *isGreatEq(int gs, const int *n);
 
-int toDecimal(const bool *diff, const int *weights);
+int toDecimalmm(const bool *diff, const int *weights);
 
 #endif //LBPSEQUENTIAL_LOCALBYNARYPATTERN_H
 

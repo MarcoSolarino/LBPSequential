@@ -1,7 +1,3 @@
-//
-// Created by marcolarino on 27/03/21.
-//
-
 #include "LocalBinaryPattern.h"
 
 
