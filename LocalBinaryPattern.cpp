@@ -5,8 +5,9 @@ Mat localBinaryPattern(Mat& inputImg) {
     const int *weights = new int[8]{1, 2, 4, 8, 16, 32, 64, 128};
     Mat imgOut = Mat::zeros(inputImg.rows, inputImg.cols, CV_8UC1);
 
-    for (int i = 0; i< inputImg.rows; i++) {
-        for (int j = 0; j < inputImg.cols; j++) {
+    copyMakeBorder(inputImg, inputImg, 1,1,1,1, BORDER_CONSTANT, 0);
+    for (int i = 1; i< inputImg.rows - 1; i++) {
+        for (int j = 1; j < inputImg.cols - 1; j++) {
             int *neighbors = getNeighbors(i, j, inputImg);
             int currentPixelGS = inputImg.at<uchar>(i, j);
             bool *differences = isGreatEq(currentPixelGS, neighbors);
@@ -29,81 +30,14 @@ Mat localBinaryPattern(Mat& inputImg) {
 int *getNeighbors(int i, int j, Mat& img) {
     int *neighbors = new int[8];
 
-    if (i == 0) {
-
-        if (j == 0) {
-            neighbors[3] = img.at<uchar>(i, j + 1);
-            neighbors[4] = img.at<uchar>(i + 1, j + 1);
-            neighbors[5] = img.at<uchar>(i + 1, j);
-        }
-
-        else if (j < img.cols - 1) {
-            neighbors[3] = img.at<uchar>(i, j + 1);
-            neighbors[4] = img.at<uchar>(i + 1, j + 1);
-            neighbors[5] = img.at<uchar>(i + 1, j);
-            neighbors[6] = img.at<uchar>(i + 1, j - 1);
-            neighbors[7] = img.at<uchar>(i, j - 1);
-        }
-
-        else if (j == img.cols - 1) {
-            neighbors[5] = img.at<uchar>(i + 1, j);
-            neighbors[6] = img.at<uchar>(i + 1, j - 1);
-            neighbors[7] = img.at<uchar>(i, j - 1);
-        }
-
-    }
-
-    else if (i > 0 && i < img.rows - 1) {
-
-        if (j == 0) {
-            neighbors[1] = img.at<uchar>(i - 1, j);
-            neighbors[2] = img.at<uchar>(i - 1, j + 1);
-            neighbors[3] = img.at<uchar>(i, j + 1);
-            neighbors[4] = img.at<uchar>(i + 1, j + 1);
-            neighbors[5] = img.at<uchar>(i + 1, j);
-        }
-
-        else if (j < img.cols - 1) {
-            neighbors[0] = img.at<uchar>(i - 1, j - 1);
-            neighbors[1] = img.at<uchar>(i - 1, j);
-            neighbors[2] = img.at<uchar>(i - 1, j + 1);
-            neighbors[3] = img.at<uchar>(i, j + 1);
-            neighbors[4] = img.at<uchar>(i + 1, j + 1);
-            neighbors[5] = img.at<uchar>(i + 1, j);
-            neighbors[6] = img.at<uchar>(i + 1, j - 1);
-            neighbors[7] = img.at<uchar>(i, j - 1);
-        }
-
-        else if (j == img.cols - 1) {
-            neighbors[0] = img.at<uchar>(i - 1, j - 1);
-            neighbors[1] = img.at<uchar>(i - 1, j);
-            neighbors[5] = img.at<uchar>(i + 1, j);
-            neighbors[6] = img.at<uchar>(i + 1, j - 1);
-            neighbors[7] = img.at<uchar>(i, j - 1);
-        }
-    }
-
-    else {
-        if (j == 0) {
-            neighbors[1] = img.at<uchar>(i - 1, j);
-            neighbors[2] = img.at<uchar>(i - 1, j + 1);
-            neighbors[3] = img.at<uchar>(i, j + 1);
-        }
-
-        else if (j < img.cols - 1) {
-            neighbors[0] = img.at<uchar>(i - 1, j - 1);
-            neighbors[1] = img.at<uchar>(i - 1, j);
-            neighbors[2] = img.at<uchar>(i - 1, j + 1);
-            neighbors[3] = img.at<uchar>(i, j + 1);
-            neighbors[7] = img.at<uchar>(i, j - 1);
-        }
-
-        else if (j == img.cols - 1) {
-            neighbors[0] = img.at<uchar>(i - 1, j - 1);
-            neighbors[1] = img.at<uchar>(i - 1, j);
-            neighbors[7] = img.at<uchar>(i, j - 1);
-        }
-    }
+    neighbors[0] = img.at<uchar>(i - 1, j - 1);
+    neighbors[1] = img.at<uchar>(i - 1, j);
+    neighbors[2] = img.at<uchar>(i - 1, j + 1);
+    neighbors[3] = img.at<uchar>(i, j + 1);
+    neighbors[4] = img.at<uchar>(i + 1, j + 1);
+    neighbors[5] = img.at<uchar>(i + 1, j);
+    neighbors[6] = img.at<uchar>(i + 1, j - 1);
+    neighbors[7] = img.at<uchar>(i, j - 1);
 
     return neighbors;
 }

@@ -7,9 +7,8 @@ using namespace std;
 int main() {
 
     Mat inputImg = imread("../input/img.jpg", 0);
-    Mat outputImg = localBinaryPattern(inputImg);
-
     imshow("Image before LBP", inputImg);
+    Mat outputImg = localBinaryPattern(inputImg);
     imshow("Image after LBP", outputImg);
     waitKey(0);
 
