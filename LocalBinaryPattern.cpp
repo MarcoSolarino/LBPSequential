@@ -13,16 +13,14 @@ Mat localBinaryPattern(Mat& inputImg) {
             bool *differences = isGreatEq(currentPixelGS, neighbors);
 
             int newVal = toDecimal(differences, weights);
-            imgOut.at<uchar>(i, j) = newVal;
+            imgOut.at<uchar>(i - 1, j - 1) = newVal;
 
-            if (imgOut.at<uchar>(i, j) != newVal) {
-                printf("Pixel at (%d, %d) was not set correctly", i, j);
-            }
-
-            delete[] neighbors;
             delete[] differences;
+            delete[] neighbors;
         }
     }
+
+    delete[] weights;
     return imgOut;
 }
 
