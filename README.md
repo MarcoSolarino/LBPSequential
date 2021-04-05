@@ -1,5 +1,4 @@
 This repository contains the final project for parallel computing course.
-It generates an output folder with histogram
 
 ## Run
 To execute the code you need to:
@@ -8,6 +7,7 @@ To execute the code you need to:
 ```
 LBPSequential img.jpg
 ```
+It generates an output folder with histogram
 
 ## Other versions
 This implementation of k-means algorithm is intended for execution time comparison wrt 
