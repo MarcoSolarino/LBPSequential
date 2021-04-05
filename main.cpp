@@ -1,16 +1,23 @@
 #include <opencv2/opencv.hpp>
+#include <chrono>
 #include "LocalBinaryPattern.h"
 
 using namespace cv;
 using namespace std;
+using namespace std::chrono;
 
-int main() {
 
-    Mat inputImg = imread("../input/img.jpg", 0);
-    imshow("Image before LBP", inputImg);
+int main(int argc, char** argv) {
+    String imgName = argv[1];
+    Mat inputImg = imread("../input/" + imgName, 0);
+    //imshow("Image before LBP", inputImg);
+    auto start = chrono::high_resolution_clock::now();
     Mat outputImg = localBinaryPattern(inputImg);
-    imshow("Image after LBP", outputImg);
-    waitKey(0);
+    auto end = chrono::high_resolution_clock::now();
+    auto ms_int = duration_cast<chrono::milliseconds>(end - start);
 
-    return 0;
+    //imshow("Image after LBP", outputImg);
+    //waitKey(0);
+
+    return ms_int.count();
 }
