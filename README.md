@@ -1,4 +1,4 @@
-This repository contains an implementation of [Local Binary Pattern algorithm](https://en.wikipedia.org/wiki/Local_binary_patterns) in OpenMP.
+This repository contains an implementation of [Local Binary Pattern algorithm](https://en.wikipedia.org/wiki/Local_binary_patterns) in C++.
 
 ## Run
 To execute the code you need to:
