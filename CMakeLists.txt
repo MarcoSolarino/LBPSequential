@@ -7,5 +7,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 find_package( OpenCV REQUIRED )
 include_directories( ${OpenCV_INCLUDE_DIRS} )
-add_executable(LBPSequential main.cpp LocalBinaryPattern.h LocalBinaryPattern.cpp writeCsv.cpp writeCsv.h)
+add_executable(LBPSequential main.cpp LocalBinaryPattern.h LocalBinaryPattern.cpp writeCsv.cpp writeCsv.h )
+add_executable(timeTests execTimeTests.cpp LocalBinaryPattern.h LocalBinaryPattern.cpp writeCsv.cpp writeCsv.h)
 target_link_libraries(LBPSequential ${OpenCV_LIBS})
+target_link_libraries(timeTests ${OpenCV_LIBS})
