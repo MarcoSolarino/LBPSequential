@@ -11,24 +11,21 @@ using namespace std;
 using namespace std::chrono;
 
 
-int main(int argc, char ** argv) {
-    int numTests = 10;
+int* testWithIncreasingSize(int numTests, int N) {
     int *time =  (int*) malloc(sizeof(int) * numTests) ;
     String imgName = "img.jpg";
     Mat inputImg = imread("../input/" + imgName, 0);
 
     for (int i = 0; i < numTests; i++) {
         //creating at each iteration a larger image
-        int borderSize = i * 1000;
-        Mat workingImg;
-        copyMakeBorder(inputImg, workingImg, borderSize, borderSize, borderSize, borderSize, BORDER_CONSTANT, 0);
+        if(i != 0)
+            copyMakeBorder(inputImg, inputImg, (inputImg.rows/2), (inputImg.rows/2), (inputImg.cols/2), (inputImg.cols/2), BORDER_CONSTANT, 0);
 
         // evaluating the mean time for each iteration
-        int N = 10;
         int partialSum = 0;
         for (int j = 0; j < N; j++) {
             auto start = chrono::high_resolution_clock::now();
-            localBinaryPattern(workingImg);
+            localBinaryPattern(inputImg);
             auto end = chrono::high_resolution_clock::now();
             auto ms_int = duration_cast<chrono::milliseconds>(end - start);
 
@@ -36,11 +33,8 @@ int main(int argc, char ** argv) {
         }
 
         time[i] = partialSum / N;
-        cout << "iteration " << i << " ended in " << time[i] << " milliseconds \n";
+        cout << "iteration with a " << inputImg.cols << " X " << inputImg.rows << " ended in " << time[i] << " milliseconds \n";
     }
 
-    cout << "tests ended" << "\n";
-    free(time);
-
-    return 0;
+    return time;
 }
