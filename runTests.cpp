@@ -9,7 +9,7 @@
 using namespace std;
 
 int main(int argc, char ** argv) {
-    int numIterations = 10;
+    int numIterations = 40;
     int N = 50;
 
     cout << "Testing time increasing image size \n";
