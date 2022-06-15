@@ -8,7 +8,7 @@ This repository contains an implementation of [Local Binary Pattern](https://en.
 # Usage
 
 - Place an image in .jpg format in ```input/``` folder
-- Run the program specifying the image name, for example ```LBPSequential imgname.jpg```
+- Run the program specifying the image name
 - At the end of the run an histogram will be generated in ```output/```
 
 # Other info
