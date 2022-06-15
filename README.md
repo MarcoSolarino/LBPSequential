@@ -1,16 +1,17 @@
-This repository contains an implementation of [Local Binary Pattern algorithm](https://en.wikipedia.org/wiki/Local_binary_patterns) in C++.
+![last commit](https://img.shields.io/github/last-commit/sim-pez/PRNU)
+![](https://img.shields.io/badge/Programming_Language-c++-blue.svg)
 
-## Run
-To execute the code you need to:
-1. Create a folder named "input"
-2. Insert an image inside input folder
-3. Compile and execute the program specifying the image name like
-```
-LBPSequential img.jpg
-```
-At the end of the run an output folder with histogram will be generated.
+# Intro 
 
-## Other versions
-This implementation of k-means algorithm is intended for execution time comparison wrt 
-[CUDA version](https://github.com/daikon899/LBP_CUDA) and 
-[OpenMP version](https://github.com/daikon899/LBP_OpenMP)
+This repository contains an implementation of [Local Binary Pattern](https://en.wikipedia.org/wiki/Local_binary_patterns) algorithm. This project is made to compare speed performances wrt multihread and GPU version.
+
+# Usage
+
+- Place an image in .jpg format in ```input/``` folder
+- Run the program specifying the image name, for example ```LBPSequential imgname.jpg```
+- At the end of the run an histogram will be generated in ```output/```
+
+# Other info
+You can check any other information on:
+- [multithread version](https://github.com/sim-pez/lbp_omp) 
+- [GPU accelerated version](https://github.com/sim-pez/lbp_gpu)
