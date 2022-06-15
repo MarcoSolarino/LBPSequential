@@ -3,7 +3,7 @@
 
 # Intro 
 
-This repository contains an implementation of [Local Binary Pattern](https://en.wikipedia.org/wiki/Local_binary_patterns) algorithm. This project is made to compare speed performances wrt multihread and GPU version.
+This repository contains an implementation of [Local Binary Pattern](https://en.wikipedia.org/wiki/Local_binary_patterns) algorithm. The project is made to compare speed performances wrt multihread and GPU version.
 
 # Usage
 
